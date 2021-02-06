@@ -7,9 +7,9 @@
 
 import Foundation
 
-var places: [Place] = load("placesData.json")
+var places: Array<Place> = load(filename: "placesData.json")
 
-func load<T: Decodable>(_ filename: String) -> T {
+func load<T: Decodable>(filename: String) -> T {
     let data: Data
 
     guard let file = Bundle.main.url(forResource: filename, withExtension: nil)
