@@ -8,11 +8,25 @@
 import SwiftUI
 
 struct PlacesList: View {
+    @State private var showFavoritesOnly = false
+    
+    var filteredPlaces: Array<Place> {
+        showFavoritesOnly ?
+            places.filter { place in place.isFavorite } :
+            places
+    }
+    
     var body: some View {
         NavigationView{
-            List(places) { place in
-                NavigationLink(destination: PlaceInfo(place: place)) {
-                    PlaceItem(place: place)
+            List {
+                Toggle(isOn: $showFavoritesOnly) {
+                    Text("Favorites only")
+                }
+                
+                ForEach(filteredPlaces) { place in
+                    NavigationLink(destination: PlaceInfo(place: place)) {
+                        PlaceItem(place: place)
+                    }
                 }
             }.navigationTitle("Places")
         }
