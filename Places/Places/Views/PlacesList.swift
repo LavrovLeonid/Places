@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct PlacesList: View {
+    @EnvironmentObject var modelData: ModelData
     @State private var showFavoritesOnly = false
     
     var filteredPlaces: Array<Place> {
         showFavoritesOnly ?
-            places.filter { place in place.isFavorite } :
-            places
+            modelData.places.filter { place in place.isFavorite } :
+            modelData.places
     }
     
     var body: some View {

@@ -28,6 +28,8 @@ struct PlaceItem: View {
 }
 
 struct PlaceItem_Previews: PreviewProvider {
+    static var places = ModelData().places
+    
     static var previews: some View {
         Group {
             PlaceItem(place: places[0])

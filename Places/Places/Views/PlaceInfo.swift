@@ -48,6 +48,6 @@ struct PlaceInfo: View {
 
 struct PlaceInfo_Previews: PreviewProvider {
     static var previews: some View {
-        PlaceInfo(place: places[0])
+        PlaceInfo(place: ModelData().places[0])
     }
 }
