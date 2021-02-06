@@ -8,44 +8,46 @@
 import SwiftUI
 
 struct PlaceInfo: View {
+    var place: Place
+    
     var body: some View {
         VStack {
-            MapView()
+            MapView(coordinate: place.locationCoordinate)
                 .ignoresSafeArea(edges: .top)
                 .frame(height: 300)
             
-            CircleImage()
+            CircleImage(image: place.image)
                 .offset(y: -130)
                 .padding(.bottom, -130)
             
             VStack(alignment: .leading) {
-                Text("Turtle Rock")
+                Text(place.name)
                     .font(.title)
                     .foregroundColor(.primary)
                 
                 HStack {
-                    Text("Joshua Tree National Park")
+                    Text(place.park)
                     Spacer()
-                    Text("California")
+                    Text(place.state)
                 }
                 .font(.subheadline)
                 .foregroundColor(.secondary)
                 
                 Divider()
                 
-                Text("About Turtle Rock")
+                Text("About \(place.name)")
                     .font(.title2)
-                Text("Descriptive text goes here.")
+                Text(place.description)
             }
             .padding()
-            
-            Spacer()
         }
+        .navigationTitle(place.name)
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
 struct PlaceInfo_Previews: PreviewProvider {
     static var previews: some View {
-        PlaceInfo()
+        PlaceInfo(place: places[0])
     }
 }

@@ -11,7 +11,7 @@ struct PlacesList: View {
     var body: some View {
         NavigationView{
             List(places) { place in
-                NavigationLink(destination: PlaceInfo()) {
+                NavigationLink(destination: PlaceInfo(place: place)) {
                     PlaceItem(place: place)
                 }
             }.navigationTitle("Places")
@@ -21,6 +21,10 @@ struct PlacesList: View {
 
 struct PlacesList_Previews: PreviewProvider {
     static var previews: some View {
-        PlacesList()
+        ForEach(["iPhone SE", "iPhone XS Max"], id: \.self) { deviceName in
+            PlacesList()
+                .previewDevice(PreviewDevice(rawValue: deviceName))
+                .previewDisplayName(deviceName)
+        }
     }
 }
