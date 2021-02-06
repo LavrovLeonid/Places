@@ -18,6 +18,11 @@ struct PlaceItem: View {
             Text(place.name)
 
             Spacer()
+
+            if place.isFavorite {
+                Image(systemName: "star.fill")
+                    .foregroundColor(.yellow)
+            }
         }
     }
 }
