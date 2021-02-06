@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PlacesList: View {
     var body: some View {
-        List(places, id: \.id) { place in
+        List(places) { place in
             PlaceItem(place: place)
         }
     }
