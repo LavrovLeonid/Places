@@ -12,9 +12,7 @@ struct PlacesList: View {
     @State private var showFavoritesOnly = false
     
     var filteredPlaces: Array<Place> {
-        showFavoritesOnly ?
-            modelData.places.filter { place in place.isFavorite } :
-            modelData.places
+        modelData.places.filter { place in (!showFavoritesOnly || place.isFavorite) }
     }
     
     var body: some View {

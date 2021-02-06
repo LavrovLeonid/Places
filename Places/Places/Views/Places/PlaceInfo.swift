@@ -8,7 +8,12 @@
 import SwiftUI
 
 struct PlaceInfo: View {
+    @EnvironmentObject var modelData: ModelData
     var place: Place
+    
+    var placeIndex: Int {
+        modelData.places.firstIndex(where: { $0.id == place.id })!
+    }
     
     var body: some View {
         VStack {
@@ -21,9 +26,12 @@ struct PlaceInfo: View {
                 .padding(.bottom, -130)
             
             VStack(alignment: .leading) {
-                Text(place.name)
-                    .font(.title)
-                    .foregroundColor(.primary)
+                HStack {
+                    Text(place.name)
+                        .font(.title)
+                        .foregroundColor(.primary)
+                    FavoriteButton(isSet: $modelData.places[placeIndex].isFavorite)
+                }
                 
                 HStack {
                     Text(place.park)
@@ -47,7 +55,10 @@ struct PlaceInfo: View {
 }
 
 struct PlaceInfo_Previews: PreviewProvider {
+    static let modelData = ModelData()
+    
     static var previews: some View {
-        PlaceInfo(place: ModelData().places[0])
+        PlaceInfo(place: modelData.places[0])
+            .environmentObject(modelData)
     }
 }
