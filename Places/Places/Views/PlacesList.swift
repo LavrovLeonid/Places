@@ -9,8 +9,12 @@ import SwiftUI
 
 struct PlacesList: View {
     var body: some View {
-        List(places) { place in
-            PlaceItem(place: place)
+        NavigationView{
+            List(places) { place in
+                NavigationLink(destination: PlaceInfo()) {
+                    PlaceItem(place: place)
+                }
+            }.navigationTitle("Places")
         }
     }
 }
